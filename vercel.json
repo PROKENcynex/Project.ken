@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "Ken.html", "use": "@vercel/static" }
+  ]
+}

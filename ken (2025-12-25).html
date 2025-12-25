@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PROJECT 肯</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #000;
+  --text: #fff;
+  --card: #0e0e0e;
+  --border: rgba(255,255,255,0.22);
+  --glow: rgba(255,255,255,0.35);
+  --shadow: rgba(255,255,255,0.2);
+}
+
+body.light {
+  --bg: #fff;
+  --text: #000;
+  --card: #f4f4f4;
+  --border: rgba(0,0,0,0.22);
+  --glow: rgba(0,0,0,0.25);
+  --shadow: rgba(0,0,0,0.2);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x:hidden;
+  transition: background 0.7s ease, color 0.7s ease;
+  position: relative;
+}
+
+/* ===== Theme toggle ===== */
+.toggle {
+  position: fixed;
+  top:16px;
+  right:16px;
+  z-index:1000;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor:pointer;
+  backdrop-filter: blur(8px);
+}
+
+/* ===== Loader / Opening Animation ===== */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  flex-direction: column;
+}
+
+#loader h1 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 5rem;
+  letter-spacing: 10px;
+  animation: introGlow 2.4s ease-in-out infinite alternate;
+}
+
+#loader p {
+  margin-top: 14px;
+  opacity: 0.65;
+  font-family: 'Open Sans', sans-serif;
+}
+
+@keyframes introGlow {
+  from { text-shadow:0 0 20px currentColor, 0 0 40px rgba(255,255,255,0.4); }
+  to   { text-shadow:0 0 50px currentColor, 0 0 90px rgba(255,255,255,0.7); }
+}
+
+/* ===== Giant "肯" background ===== */
+.bg-text {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.02);
+  z-index: -1;
+  pointer-events: none;
+  text-shadow: 2px 2px 20px rgba(255,255,255,0.03);
+  transition: color 0.7s ease;
+}
+
+body.light .bg-text {
+  color: rgba(0,0,0,0.02);
+  text-shadow: 2px 2px 20px rgba(0,0,0,0.03);
+}
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 68vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.hero h1 { font-size:4.6rem; letter-spacing:6px; font-family:'Roboto Slab', serif; }
+.hero p { margin-top:10px; opacity:0.7; font-family:'Open Sans', sans-serif; }
+
+/* ===== Services ===== */
+.services {
+  display: flex;
+  flex-direction: column;
+  gap:18px;
+  padding:10px 10% 70px;
+  align-items:center;
+}
+
+/* ===== Cards ===== */
+.card {
+  width: 100%;
+  max-width: 720px;
+  background: var(--card);
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.4s cubic-bezier(.2,.8,.2,1),
+    box-shadow 0.4s cubic-bezier(.2,.8,.2,1),
+    background 0.7s ease;
+  box-shadow: 0 6px 15px var(--shadow);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px var(--shadow);
+}
+
+/* Headlines in cards */
+.card h2 {
+  margin-bottom:8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+/* Paragraphs in cards */
+.card p { opacity:0.75; font-family: 'Open Sans', sans-serif; font-size:1rem; }
+
+/* Touch light (one touch for all cards) */
+.card::after {
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  background: radial-gradient(circle,var(--glow),transparent 65%);
+  top: var(--y,50%);
+  left: var(--x,50%);
+  transform:translate(-50%,-50%);
+  opacity:0;
+  transition: opacity 0.5s ease;
+  pointer-events:none;
+}
+
+.card.active::after { opacity:1; }
+
+/* Contact */
+.contact {
+  padding: 80px 10% 60px;
+  text-align: center;
+}
+
+.contact h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.4rem;
+}
+
+.contact p {
+  opacity: 0.65;
+  margin: 12px 0 32px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.contact-links a {
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 12px 22px;
+  border-radius: 999px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-links a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px var(--shadow);
+}
+
+/* ===== Footer ===== */
+footer { text-align:center; padding:40px; opacity:0.5; font-family:'Open Sans', sans-serif; }
+</style>
+</head>
+
+<body>
+
+<!-- Fixed giant "肯" background -->
+<div class="bg-text">肯</div>
+
+<button class="toggle" id="toggle">Black / White</button>
+
+<!-- Original glow loader -->
+<div id="loader">
+  <h1>PROJECT 肯</h1>
+  <p>Design • Web • Motion</p>
+</div>
+
+<section class="hero">
+  <h1>PROJECT 肯</h1>
+  <p>Graphic Design • Websites • Video Editing • Logo Design</p>
+</section>
+
+<section class="services">
+
+  <div class="card">
+    <h2>🎨 Graphic Designing</h2>
+    <p>
+      Posters, logos, social media creatives, and GFX designs that catch eyes and
+      build a strong brand identity.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>🎬 Video Editing</h2>
+    <p>
+      Creative and smooth edits for reels, YouTube, and promotional videos that
+      keep viewers engaged.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>🌐 Website Making</h2>
+    <p>
+      Modern, responsive websites designed to look professional and perform
+      smoothly on all devices.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>📩 Let’s bring your ideas to life</h2>
+    <p>
+      DM now for quality designs and reliable service tailored to your vision.
+    </p>
+  </div>
+
+</section>
+<section class="contact">
+  <h2>Contact</h2>
+  <p>Let’s build something meaningful.</p>
+  <div class="contact-links">
+    <a href="https://instagram.com/project.ken_" target="_blank">Instagram </a>
+    <a href="mailto:prokencynex@gmail.com">    Email   </a>
+    <a href="https://wa.me/919655266162" target="_blank"> WhatsApp </a>
+    <a href="https://t.me/+919655266162" target="_blank"> Telegram  </a>
+  </div>
+</section>
+
+
+<footer>© 2025 PROJECT 肯
+</br><a>ken. all rights reserved</a>
+</footer>
+
+<script>
+// Remove loader after animation
+setTimeout(()=>{document.getElementById("loader").style.display="none";},3800);
+
+// One-touch effect for all cards with proper fade
+const cards = document.querySelectorAll(".card");
+let touchTimeout = null;
+
+const setLightAll = (x, y) => {
+  cards.forEach(card=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty("--x",`${x-r.left}px`);
+    card.style.setProperty("--y",`${y-r.top}px`);
+    card.classList.add("active");
+  });
+  if(touchTimeout) clearTimeout(touchTimeout);
+};
+
+const fadeLightAll = () => {
+  touchTimeout = setTimeout(()=>{
+    cards.forEach(card=>card.classList.remove("active"));
+  },500); // 0.5s fade
+};
+
+// Mouse
+document.addEventListener("mousemove", e => setLightAll(e.clientX, e.clientY));
+document.addEventListener("mouseleave", fadeLightAll);
+
+// Touch
+document.addEventListener("touchstart", e => {
+  const t = e.touches[0];
+  setLightAll(t.clientX, t.clientY);
+},{passive:true});
+
+document.addEventListener("touchmove", e => {
+  const t = e.touches[0];
+  setLightAll(t.clientX, t.clientY);
+},{passive:true});
+
+document.addEventListener("touchend", fadeLightAll);
+
+// Theme toggle
+document.getElementById("toggle").onclick = ()=>{document.body.classList.toggle("light");};
+</script>
+
+</body>
+</html>
