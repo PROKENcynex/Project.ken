@@ -1,13 +1,6 @@
 {
   "version": 2,
   "routes": [
-    {
-      "src": "/",
-      "dest": "/project-ken (25-12-2025).html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/project-ken (25-12-2025).html"
-    }
+    { "src": "/", "dest": "/ken (25-12-2025).html" }
   ]
 }
