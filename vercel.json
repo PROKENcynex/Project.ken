@@ -1,6 +1,13 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "Ken (2025-12-25).html", "use": "@vercel/static" }
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/project-ken (25-12-2025).html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/project-ken (25-12-2025).html"
+    }
   ]
 }
