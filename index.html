@@ -2,226 +2,237 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PROJECT 肯</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?
+family=Playfair+Display:wght@600;700;800&
+family=Space+Grotesk:wght@500;600;700&
+family=Inter:wght@400;500;600&
+display=swap" rel="stylesheet">
+
 <style>
-:root {
-  --bg: #000;
-  --text: #fff;
-  --card: #0e0e0e;
-  --border: rgba(255,255,255,0.22);
-  --glow: rgba(255,255,255,0.35);
-  --shadow: rgba(255,255,255,0.2);
+
+/* ================= THEME COLORS ================= */
+:root{
+  --bg:#000;
+  --text:#fff;
+  --card:#0e0e0e;
+  --border:rgba(255,255,255,.22);
+  --glow:rgba(255,255,255,.35);
+  --shadow:rgba(255,255,255,.2);
 }
 
-body.light {
-  --bg: #fff;
-  --text: #000;
-  --card: #f4f4f4;
-  --border: rgba(0,0,0,0.22);
-  --glow: rgba(0,0,0,0.25);
-  --shadow: rgba(0,0,0,0.2);
+body.light{
+  --bg:#fff;
+  --text:#000;
+  --card:#f4f4f4;
+  --border:rgba(0,0,0,.22);
+  --glow:rgba(0,0,0,.25);
+  --shadow:rgba(0,0,0,.2);
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-body {
-  background: var(--bg);
-  color: var(--text);
+html{font-size:16.5px}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  transition:.6s ease;
   overflow-x:hidden;
-  transition: background 0.7s ease, color 0.7s ease;
-  position: relative;
 }
 
-/* ===== Theme toggle ===== */
-.toggle {
-  position: fixed;
+/* ================= THEME BUTTON ================= */
+.toggle{
+  position:fixed;
   top:16px;
   right:16px;
   z-index:1000;
-  padding:8px 14px;
+  padding:7px 14px;
   border-radius:999px;
   border:1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
+  background:var(--card);
+  color:var(--text);
   cursor:pointer;
-  backdrop-filter: blur(8px);
 }
 
-/* ===== Loader / Opening Animation ===== */
-#loader {
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  flex-direction: column;
+/* ================= OPENING ================= */
+#loader{
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:2000;
 }
 
-#loader h1 {
-  font-family: 'Roboto Slab', serif;
-  font-size: 5rem;
-  letter-spacing: 10px;
-  animation: introGlow 2.4s ease-in-out infinite alternate;
+#loader h1{
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem;
+  letter-spacing:10px;
+  animation:introGlow 2.4s ease-in-out infinite alternate;
 }
 
-#loader p {
-  margin-top: 14px;
-  opacity: 0.65;
-  font-family: 'Open Sans', sans-serif;
+#loader p{opacity:.65;margin-top:14px}
+
+@keyframes introGlow{
+  from{
+    text-shadow:0 0 20px currentColor,0 0 40px rgba(255,255,255,.4);
+  }
+  to{
+    text-shadow:0 0 50px currentColor,0 0 90px rgba(255,255,255,.7);
+  }
 }
 
-@keyframes introGlow {
-  from { text-shadow:0 0 20px currentColor, 0 0 40px rgba(255,255,255,0.4); }
-  to   { text-shadow:0 0 50px currentColor, 0 0 90px rgba(255,255,255,0.7); }
+/* ================= BACKGROUND KAN ================= */
+.bg-text{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:25rem;
+  font-weight:900;
+  opacity:.03;
+  pointer-events:none;
+  z-index:-1;
 }
 
-/* ===== Giant "肯" background ===== */
-.bg-text {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 40rem;
-  font-weight: 900;
-  color: rgba(255,255,255,0.02);
-  z-index: -1;
-  pointer-events: none;
-  text-shadow: 2px 2px 20px rgba(255,255,255,0.03);
-  transition: color 0.7s ease;
+/* ================= HERO ================= */
+.hero{
+  min-height:71vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
-body.light .bg-text {
-  color: rgba(0,0,0,0.02);
-  text-shadow: 2px 2px 20px rgba(0,0,0,0.03);
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.1rem,5.1vw,4.3rem);
+  letter-spacing:4.5px;
 }
 
-/* ===== Hero ===== */
-.hero {
-  min-height: 68vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding-top: 50px;
+.hero p{
+  margin-top:8px;
+  opacity:.7;
+  font-size:.6rem;
 }
 
-.hero h1 { font-size:4.6rem; letter-spacing:6px; font-family:'Roboto Slab', serif; }
-.hero p { margin-top:10px; opacity:0.7; font-family:'Open Sans', sans-serif; }
-
-/* ===== Services ===== */
-.services {
-  display: flex;
-  flex-direction: column;
-  gap:18px;
-  padding:10px 10% 70px;
+/* ================= SERVICES ================= */
+.services{
+  padding:10px 10% 62px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
   align-items:center;
 }
 
-/* ===== Cards ===== */
-.card {
-  width: 100%;
-  max-width: 720px;
-  background: var(--card);
-  padding: 32px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform 0.4s cubic-bezier(.2,.8,.2,1),
-    box-shadow 0.4s cubic-bezier(.2,.8,.2,1),
-    background 0.7s ease;
-  box-shadow: 0 6px 15px var(--shadow);
+/* ================= CARD ================= */
+.card{
+  width:95%;
+  max-width:690px;
+  background:var(--card);
+  padding:27px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  position:relative;
+  overflow:hidden;
+  transition:.28s ease;
+  box-shadow:0 6px 14px var(--shadow);
 }
 
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 60px var(--shadow);
+.card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 25px 50px var(--shadow);
 }
 
-/* Headlines in cards */
-.card h2 {
-  margin-bottom:8px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 1.8rem;
+.card h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.6rem;
+  margin-bottom:6px;
 }
 
-/* Paragraphs in cards */
-.card p { opacity:0.75; font-family: 'Open Sans', sans-serif; font-size:1rem; }
+.card p{
+  font-size:.97rem;
+  opacity:.75;
+  line-height:1.55;
+}
 
-/* Touch light (one touch for all cards) */
-.card::after {
+/* ===== TOUCH LIGHT ===== */
+.card::after{
   content:"";
   position:absolute;
-  width:260px;
-  height:260px;
-  background: radial-gradient(circle,var(--glow),transparent 65%);
-  top: var(--y,50%);
-  left: var(--x,50%);
+  width:240px;
+  height:240px;
+  background:radial-gradient(circle,var(--glow),transparent 65%);
+  top:var(--y,50%);
+  left:var(--x,50%);
   transform:translate(-50%,-50%);
   opacity:0;
-  transition: opacity 0.5s ease;
+  filter:blur(6px);
+  transition:opacity .5s ease;
   pointer-events:none;
 }
 
-.card.active::after { opacity:1; }
+.card.active::after{opacity:1}
 
-/* Contact */
-.contact {
-  padding: 80px 10% 60px;
-  text-align: center;
+/* ================= CONTACT ================= */
+.contact{
+  padding:68px 10% 54px;
+  text-align:center;
 }
 
-.contact h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.4rem;
+.contact h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:2.15rem;
 }
 
-.contact p {
-  opacity: 0.65;
-  margin: 12px 0 32px;
+.contact-links{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  align-items:center;
 }
 
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
+.contact-links a{
+  text-decoration:none;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:11px 20px;
+  border-radius:999px;
 }
 
-.contact-links a {
-  text-decoration: none;
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 12px 22px;
-  border-radius: 999px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  padding:36px;
+  opacity:.5;
+  font-size:.9rem;
 }
 
-.contact-links a:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px var(--shadow);
-}
-
-/* ===== Footer ===== */
-footer { text-align:center; padding:40px; opacity:0.5; font-family:'Open Sans', sans-serif; }
 </style>
 </head>
 
 <body>
 
-<!-- Fixed giant "肯" background -->
 <div class="bg-text">肯</div>
 
 <button class="toggle" id="toggle">Black / White</button>
 
-<!-- Original glow loader -->
 <div id="loader">
   <h1>PROJECT 肯</h1>
   <p>Design • Web • Motion</p>
@@ -233,98 +244,70 @@ footer { text-align:center; padding:40px; opacity:0.5; font-family:'Open Sans', 
 </section>
 
 <section class="services">
-
   <div class="card">
     <h2>🎨 Graphic Designing</h2>
-    <p>
-      Posters, logos, social media creatives, and GFX designs that catch eyes and
-      build a strong brand identity.
-    </p>
+    <p>Posters, logos, social media creatives, and GFX designs.</p>
   </div>
 
   <div class="card">
     <h2>🎬 Video Editing</h2>
-    <p>
-      Creative and smooth edits for reels, YouTube, and promotional videos that
-      keep viewers engaged.
-    </p>
+    <p>Clean, cinematic edits for reels and promotional content.</p>
   </div>
 
   <div class="card">
     <h2>🌐 Website Making</h2>
-    <p>
-      Modern, responsive websites designed to look professional and perform
-      smoothly on all devices.
-    </p>
+    <p>Modern, responsive websites built for performance.</p>
   </div>
 
   <div class="card">
     <h2>📩 Let’s bring your ideas to life</h2>
-    <p>
-      DM now for quality designs and reliable service tailored to your vision.
-    </p>
+    <p>DM now for quality designs and reliable service.</p>
   </div>
-
 </section>
+
 <section class="contact">
   <h2>Contact</h2>
-  <p>Let’s build something meaningful.</p>
   <div class="contact-links">
-    <a href="https://instagram.com/project.ken_" target="_blank">Instagram </a>
-    <a href="mailto:prokencynex@gmail.com">    Email   </a>
-    <a href="https://wa.me/919655266162" target="_blank"> WhatsApp </a>
-    <a href="https://t.me/+919655266162" target="_blank"> Telegram  </a>
+    <a href="https://instagram.com/project.ken_" target="_blank">Instagram</a>
+    <a href="mailto:prokencynex@gmail.com">Email</a>
+    <a href="https://wa.me/919655266162" target="_blank">WhatsApp</a>
+    <a href="https://t.me/+919655266162" target="_blank">Telegram</a>
   </div>
 </section>
 
-
-<footer>© 2025 PROJECT 肯
-</br><a>ken. all rights reserved</a>
-</footer>
+<footer>© 2025 PROJECT 肯 — All rights reserved</footer>
 
 <script>
-// Remove loader after animation
-setTimeout(()=>{document.getElementById("loader").style.display="none";},3800);
+/* Hide opening */
+setTimeout(()=>loader.style.display="none",3800);
 
-// One-touch effect for all cards with proper fade
-const cards = document.querySelectorAll(".card");
-let touchTimeout = null;
+/* Touch glow */
+const cards=document.querySelectorAll(".card");
+let timer=null;
 
-const setLightAll = (x, y) => {
-  cards.forEach(card=>{
-    const r=card.getBoundingClientRect();
-    card.style.setProperty("--x",`${x-r.left}px`);
-    card.style.setProperty("--y",`${y-r.top}px`);
-    card.classList.add("active");
+const light=(x,y)=>{
+  cards.forEach(c=>{
+    const r=c.getBoundingClientRect();
+    c.style.setProperty("--x",`${x-r.left}px`);
+    c.style.setProperty("--y",`${y-r.top}px`);
+    c.classList.add("active");
   });
-  if(touchTimeout) clearTimeout(touchTimeout);
+  clearTimeout(timer);
 };
 
-const fadeLightAll = () => {
-  touchTimeout = setTimeout(()=>{
-    cards.forEach(card=>card.classList.remove("active"));
-  },500); // 0.5s fade
-};
+const fade=()=>timer=setTimeout(
+  ()=>cards.forEach(c=>c.classList.remove("active")),
+  500
+);
 
-// Mouse
-document.addEventListener("mousemove", e => setLightAll(e.clientX, e.clientY));
-document.addEventListener("mouseleave", fadeLightAll);
+document.addEventListener("mousemove",e=>light(e.clientX,e.clientY));
+document.addEventListener("mouseleave",fade);
+document.addEventListener("touchstart",e=>light(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+document.addEventListener("touchmove",e=>light(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+document.addEventListener("touchend",fade);
 
-// Touch
-document.addEventListener("touchstart", e => {
-  const t = e.touches[0];
-  setLightAll(t.clientX, t.clientY);
-},{passive:true});
-
-document.addEventListener("touchmove", e => {
-  const t = e.touches[0];
-  setLightAll(t.clientX, t.clientY);
-},{passive:true});
-
-document.addEventListener("touchend", fadeLightAll);
-
-// Theme toggle
-document.getElementById("toggle").onclick = ()=>{document.body.classList.toggle("light");};
+/* Theme toggle */
+toggle.onclick=()=>document.body.classList.toggle("light");
 </script>
 
 </body>
